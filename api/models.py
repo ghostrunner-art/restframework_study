@@ -10,7 +10,7 @@ class UserGroup(models.Model):
 
 class UserInfo(models.Model):
     user_type_choices = [
-        (1, 'simpleUser'),
+        (1, '普通用户'),
         (2, 'vipUser'),
         (3, 'svipUser'),
     ]
