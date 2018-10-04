@@ -35,26 +35,30 @@ from rest_framework import serializers
 import json
 
 class RolesSerializers(serializers.Serializer):
-    tt = serializers.CharField(source='title')
+    tt = serializers.CharField(source='title',)
+    class Meta:
+        model = UserInfo
+        fields = '__all__'
+        depth = 1
 
 class UserSerializers(serializers.Serializer):
-    cc = serializers.CharField(source='user_type')
-    bb = serializers.CharField(source='get_user_type_display')
+    cc = serializers.CharField(source='user_type',)
+    bb = serializers.CharField(source='get_user_type_display',)
 
 class RolesView(APIView):
     def get(self,request,*args,**kwargs):
         # role_obj = Role.objects.get('title')
         # print(role_obj)
         rol = Role.objects.all()
-        rol2 = UserInfo.objects.all()
+        userinfo2 = UserInfo.objects.all()
         ser = RolesSerializers(instance=rol,many=True)
-        ser2 = UserSerializers(instance=rol2,many=True)
+        userinfo2 = UserSerializers(instance=userinfo2,many=True)
         ser11 = json.dumps(ser.data,ensure_ascii=False)
-        ser22 = json.dumps(ser2.data,ensure_ascii=False)
+        ser22 = json.dumps(userinfo2.data,ensure_ascii=False)
         print(ser11)
         return HttpResponse(ser22)
 
-
+from rest_framework.pagination import PageNumberPagination
 
 
 

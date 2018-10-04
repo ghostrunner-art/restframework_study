@@ -9,6 +9,7 @@ from .models import Role
 
 from django.http import HttpResponse
 
+
 class RolesView(APIView):
     def get(self,request,*args,**kwargs):
         # role_obj = Role.objects.get('title')
